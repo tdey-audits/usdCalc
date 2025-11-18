@@ -1,0 +1,10 @@
+# No external dependencies required
+# The application uses only Python standard library:
+# - tkinter (included with Python)
+# - json (standard library)
+# - urllib (standard library)
+# - datetime (standard library)
+# - typing (standard library)
+
+# For development/testing (optional):
+# pytest>=7.0.0
