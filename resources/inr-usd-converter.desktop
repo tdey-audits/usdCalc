@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=INR-USD Converter
+Comment=Currency converter between Indian Rupees and US Dollars
+Exec=inr-usd-converter-gui
+Icon=accessories-calculator
+Terminal=false
+Categories=Utility;Finance;Office;
+Keywords=currency;converter;INR;USD;exchange;money;
