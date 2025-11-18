@@ -1,143 +1,139 @@
 # INR ⇄ USD Currency Converter
 
-A standalone desktop application for converting between Indian Rupees (INR) and US Dollars (USD) with a clean, modern interface.
+A standalone desktop application for converting between Indian Rupees (INR) and US Dollars (USD) with both command-line (CLI) and graphical (GUI) interfaces.
 
 ## Features
 
 - **Bidirectional Conversion**: Convert from USD to INR and vice versa
 - **Live Exchange Rates**: Automatically fetches current exchange rates from API
+- **CLI & GUI Modes**: Use from terminal or launch graphical interface
 - **Modern UI**: Black, white, and red color scheme with Inter and Instrument Serif fonts
 - **Simple & Intuitive**: Just type in either field to see instant conversion
 - **Offline Support**: Uses cached rates when offline
+- **Cross-platform**: Works on macOS and Linux
 
-## Requirements
+## Installation
 
-- Python 3.6 or higher
-- Tkinter (usually comes pre-installed with Python)
+### Homebrew (macOS and Linux)
 
-## Installation & Setup
-
-### 1. Install Python
-
-Most Linux distributions come with Python 3 pre-installed. Check your version:
+The easiest way to install is via Homebrew:
 
 ```bash
-python3 --version
+brew install inr-usd-converter
 ```
 
-If Python is not installed, install it using your package manager:
-
-**Ubuntu/Debian:**
-```bash
-sudo apt update
-sudo apt install python3 python3-tk
-```
-
-**Fedora:**
-```bash
-sudo dnf install python3 python3-tkinter
-```
-
-**Arch Linux:**
-```bash
-sudo pacman -S python tk
-```
-
-### 2. Install Fonts (Optional but Recommended)
-
-For the best visual experience, install the Inter and Instrument Serif fonts:
-
-**Inter Font:**
-```bash
-# Download and install Inter font
-wget https://github.com/rsms/inter/releases/download/v3.19/Inter-3.19.zip
-unzip Inter-3.19.zip -d Inter
-sudo mkdir -p /usr/share/fonts/truetype/inter
-sudo cp Inter/Inter\ Desktop/*.ttf /usr/share/fonts/truetype/inter/
-sudo fc-cache -f -v
-```
-
-**Instrument Serif Font:**
-```bash
-# Download from Google Fonts or use system serif font as fallback
-# The app will work with system default fonts if these are not available
-```
-
-Alternatively, you can use the system's font manager to install these fonts from Google Fonts.
-
-## Running the Application
-
-### Method 1: Direct Execution
-
-Make the script executable and run it:
+For Linux users, you may need to install Homebrew (Linuxbrew) first:
 
 ```bash
-chmod +x currency_converter.py
-./currency_converter.py
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-### Method 2: Using Python
+### Manual Installation
 
-```bash
-python3 currency_converter.py
-```
+If you prefer not to use Homebrew:
 
-### Method 3: Create Desktop Launcher (Optional)
-
-Create a desktop entry for easy access:
-
-```bash
-# Create .desktop file
-cat > ~/.local/share/applications/currency-converter.desktop << EOF
-[Desktop Entry]
-Version=1.0
-Type=Application
-Name=INR-USD Converter
-Comment=Currency converter between INR and USD
-Exec=/usr/bin/python3 $(pwd)/currency_converter.py
-Icon=accessories-calculator
-Terminal=false
-Categories=Utility;Finance;
-EOF
-
-# Update desktop database
-update-desktop-database ~/.local/share/applications/
-```
-
-Now you can launch the app from your application menu.
+1. Clone or download this repository
+2. Make sure Python 3.8+ is installed
+3. For GUI mode, ensure Tkinter is available:
+   ```bash
+   # Ubuntu/Debian
+   sudo apt install python3-tk
+   
+   # Fedora
+   sudo dnf install python3-tkinter
+   
+   # Arch Linux
+   sudo pacman -S tk
+   ```
+4. Run the application:
+   ```bash
+   python3 currency_converter.py
+   ```
 
 ## Usage
 
-1. **Launch the application** using any of the methods above
-2. **Enter an amount** in either the USD or INR field
-3. **See instant conversion** in the other field
-4. **Refresh rate** using the "Refresh Rate" button to get the latest exchange rate
-5. The current exchange rate is displayed at the bottom of the converter
+### Command Line Interface (CLI)
 
-## How It Works
+After installation via Homebrew, use the `inr-usd-converter` command:
 
-- The app fetches live exchange rates from a free API (exchangerate-api.com)
-- Rates are cached for 1 hour to minimize API calls
-- If the API is unavailable, it uses a sensible default rate (₹83.12 per USD)
-- Conversions happen instantly as you type
-
-## Troubleshooting
-
-### "ModuleNotFoundError: No module named 'tkinter'"
-
-Install the tkinter package:
 ```bash
-sudo apt install python3-tk  # Ubuntu/Debian
-sudo dnf install python3-tkinter  # Fedora
+# Convert 100 USD to INR
+inr-usd-converter 100 usd
+
+# Convert 1000 INR to USD
+inr-usd-converter 1000 inr
+
+# Display current exchange rate
+inr-usd-converter --rate
+
+# Use higher precision (e.g., 4 decimal places)
+inr-usd-converter 50.50 usd --precision 4
+
+# Use cached rate without fetching live data
+inr-usd-converter 100 usd --no-fetch
+
+# Show help
+inr-usd-converter --help
+
+# Show version
+inr-usd-converter --version
 ```
 
-### Fonts not displaying correctly
+**Example Output:**
 
-The application will work with system default fonts if Inter and Instrument Serif are not available. For the best experience, install the fonts as described in the setup section.
+```
+$ inr-usd-converter 100 usd
+$100.00 USD = ₹8,312.00 INR
+(Live rate: 1 USD = ₹83.12 INR)
 
-### Cannot fetch exchange rates
+$ inr-usd-converter 5000 inr
+₹5,000.00 INR = $60.14 USD
+(Live rate: 1 USD = ₹83.12 INR)
 
-If you're offline or the API is unavailable, the app will use a cached or default exchange rate. You'll see a message indicating whether you're using a live or default rate.
+$ inr-usd-converter --rate
+1 USD = ₹83.12 INR (live rate)
+```
+
+### Graphical User Interface (GUI)
+
+Launch the GUI application:
+
+```bash
+# Via the dedicated GUI command
+inr-usd-converter-gui
+
+# Or by running without arguments
+inr-usd-converter
+```
+
+On Linux with Homebrew, you can also find "INR-USD Converter" in your application menu.
+
+**Using the GUI:**
+
+1. Enter an amount in either the USD or INR field
+2. See instant conversion in the other field
+3. Click "Refresh Rate" to update to the latest exchange rate
+4. The current exchange rate is displayed at the bottom
+
+### Python Module
+
+You can also use the converter as a Python module:
+
+```python
+from currency_converter import CurrencyConverter
+
+converter = CurrencyConverter()
+usd_amount = 100
+inr_amount = converter.usd_to_inr(usd_amount)
+print(f"${usd_amount} = ₹{inr_amount:.2f}")
+```
+
+## Requirements
+
+- **Python**: 3.8 or higher
+- **Tkinter**: Required for GUI mode (usually pre-installed with Python)
+- **Standard Library**: Uses only Python standard library (json, urllib, datetime, etc.)
+- **Internet**: Optional - fetches live rates when available, falls back to cached/default rates
 
 ## Design
 
@@ -145,11 +141,97 @@ If you're offline or the API is unavailable, the app will use a cached or defaul
 - **Typography**: 
   - Inter font for UI elements and body text
   - Instrument Serif font for headings and accents
+  - Graceful fallback to system fonts if custom fonts unavailable
 - **Layout**: Clean, minimal interface with clear visual hierarchy
+
+## How It Works
+
+- Fetches live exchange rates from [ExchangeRate-API](https://www.exchangerate-api.com/)
+- Rates are cached for 1 hour to minimize API calls
+- If the API is unavailable, uses a sensible default rate (₹83.12 per USD)
+- Conversions happen instantly as you type (GUI mode)
+- CLI mode supports flexible options for offline use and precision control
+
+## Development
+
+### Running Tests
+
+```bash
+python3 test_converter.py
+```
+
+### File Structure
+
+```
+.
+├── currency_converter.py    # Main application (CLI + GUI)
+├── test_converter.py        # Test suite
+├── pyproject.toml           # Python package configuration
+├── setup.py                 # Setup script for installation
+├── Formula/
+│   └── inr-usd-converter.rb # Homebrew formula
+├── resources/
+│   └── inr-usd-converter.desktop # Linux desktop entry
+├── README.md                # This file
+├── USAGE.md                 # Detailed usage guide
+├── FEATURES.md              # Design and features
+├── LICENSE                  # MIT License
+└── requirements.txt         # Python dependencies (none)
+```
+
+## Troubleshooting
+
+### CLI Issues
+
+**Command not found:**
+```bash
+# Make sure Homebrew's bin is in your PATH
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+# Or on macOS:
+export PATH="/usr/local/bin:$PATH"
+```
+
+### GUI Issues
+
+**"ModuleNotFoundError: No module named 'tkinter'":**
+
+Install the tkinter package:
+```bash
+sudo apt install python3-tk        # Ubuntu/Debian
+sudo dnf install python3-tkinter   # Fedora
+sudo pacman -S tk                  # Arch Linux
+brew reinstall python@3.11         # macOS (Homebrew)
+```
+
+**Fonts not displaying correctly:**
+
+The application will work with system default fonts if Inter and Instrument Serif are not available. For the best experience, install these fonts from [Google Fonts](https://fonts.google.com/).
+
+**Cannot fetch exchange rates:**
+
+If you're offline or the API is unavailable, the app will use a cached or default exchange rate. Use the `--no-fetch` flag to skip API calls entirely.
+
+## Platform Notes
+
+### macOS
+
+- Tkinter is included with Homebrew's Python
+- GUI launches without additional dependencies
+- Can be run from Terminal or application launcher
+
+### Linux
+
+- May require separate `python3-tk` package installation
+- Desktop entry is installed to `~/.local/share/applications/` (manual install) or `/home/linuxbrew/.linuxbrew/share/applications/` (Homebrew)
+- Works on all major distributions (Ubuntu, Fedora, Arch, etc.)
+
+## Contributing
+
+This is an open-source project. Contributions, issues, and feature requests are welcome!
 
 ## License
 
-This project is open source and available for personal and commercial use.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## API Credits
 

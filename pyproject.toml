@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inr-usd-converter"
+version = "1.0.0"
+description = "Bidirectional INR ⇄ USD currency converter with CLI and Tkinter GUI"
+readme = "README.md"
+authors = [
+  { name = "INR-USD Converter Team" }
+]
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+keywords = ["currency", "converter", "inr", "usd", "finance", "tkinter"]
+classifiers = [
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Office/Business :: Financial :: Accounting",
+]
+dependencies = []
+
+[project.scripts]
+"inr-usd-converter" = "currency_converter:main"
+"inr-usd-converter-gui" = "currency_converter:run_gui"
+
+[tool.setuptools]
+py-modules = ["currency_converter"]

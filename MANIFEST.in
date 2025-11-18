@@ -1,0 +1,9 @@
+include README.md
+include LICENSE
+include USAGE.md
+include FEATURES.md
+include HOMEBREW.md
+include CLI.md
+include requirements.txt
+recursive-include resources *
+recursive-include Formula *
